@@ -6,6 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const RUNS_KEY = '@running_tracker_runs';
 const SETTINGS_KEY = '@running_tracker_settings';
+const PRESETS_KEY = '@running_tracker_challenge_presets';
 
 export const saveRuns = async (runs) => {
   try {
@@ -43,3 +44,20 @@ export const loadSettings = async () => {
   }
 };
 
+export const saveChallengePresets = async (presets) => {
+  try {
+    await AsyncStorage.setItem(PRESETS_KEY, JSON.stringify(presets));
+  } catch (e) {
+    console.error('Error saving challenge presets:', e);
+  }
+};
+
+export const loadChallengePresets = async () => {
+  try {
+    const data = await AsyncStorage.getItem(PRESETS_KEY);
+    return data ? JSON.parse(data) : null;
+  } catch (e) {
+    console.error('Error loading challenge presets:', e);
+    return null;
+  }
+};

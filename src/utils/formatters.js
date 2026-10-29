@@ -65,6 +65,34 @@ export function formatPace(secondsPerKm, unit = 'km') {
 }
 
 /**
+ * Format speed in km/h or mph.
+ * @param {number} secondsPerKm
+ * @param {string} unit - 'km' or 'mi'
+ * @returns {string} e.g. "10.5 km/h" or "6.5 mph"
+ */
+export function formatSpeed(secondsPerKm, unit = 'km') {
+  if (!secondsPerKm || !isFinite(secondsPerKm) || secondsPerKm <= 0) {
+    return `0.0 ${unit === 'mi' ? 'mph' : 'km/h'}`;
+  }
+  const speedKmH = 3600 / secondsPerKm;
+  if (unit === 'mi') {
+    const speedMph = speedKmH / 1.60934;
+    return `${speedMph.toFixed(1)} mph`;
+  }
+  return `${speedKmH.toFixed(1)} km/h`;
+}
+
+/**
+ * Format speed or pace based on user preference ('pace' | 'speed').
+ */
+export function formatMetric(secondsPerKm, unit = 'km', metricDisplay = 'pace') {
+  if (metricDisplay === 'speed') {
+    return formatSpeed(secondsPerKm, unit);
+  }
+  return formatPace(secondsPerKm, unit);
+}
+
+/**
  * Format a date string to a readable date.
  * @param {string} dateString - ISO date string
  * @returns {string} e.g. "Oct 27, 2026"

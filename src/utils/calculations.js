@@ -63,9 +63,10 @@ export function calculatePace(distanceMeters, durationSeconds) {
  * @returns {number}
  */
 export function calculateCalories(distanceMeters, weightKg = 70) {
-  // Roughly 1 kcal per kg per km for running
+  // Standard MET formula: ~1 kcal per kg per km for running
+  const kg = (typeof weightKg === 'number' && weightKg > 0) ? weightKg : 70;
   const km = distanceMeters / 1000;
-  return km * weightKg * 1.036;
+  return km * kg * 1.036;
 }
 
 /**

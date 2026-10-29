@@ -15,6 +15,7 @@
       }
     },
     "android": {
+      "package": "com.runningtracker.app",
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/android-icon-foreground.png",
@@ -23,7 +24,10 @@
       },
       "permissions": [
         "ACCESS_FINE_LOCATION",
-        "ACCESS_COARSE_LOCATION"
+        "ACCESS_COARSE_LOCATION",
+        "FOREGROUND_SERVICE",
+        "FOREGROUND_SERVICE_LOCATION",
+        "POST_NOTIFICATIONS"
       ]
     },
     "web": {
@@ -34,7 +38,21 @@
       [
         "expo-location",
         {
-          "locationWhenInUsePermission": "Running Tracker needs your location to track distance and route during runs."
+          "locationWhenInUsePermission": "Running Tracker needs your location to track distance and route during runs.",
+          "isAndroidForegroundServiceEnabled": true
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/icon.png",
+          "color": "#00E676"
+        }
+      ],
+      [
+        "react-native-maps",
+        {
+          "androidGoogleMapsApiKey": ""
         }
       ]
     ]
